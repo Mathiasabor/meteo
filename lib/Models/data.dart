@@ -12,3 +12,7 @@ static List<Meteo> db = [
 ];
 
 }
+
+class Meteos{
+
+}

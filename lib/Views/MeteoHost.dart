@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meteo/Views/MeteosList.dart';
 
+import '../main.dart';
 import 'MeteoPage.dart';
 
 class MeteoHost extends StatefulWidget {
@@ -13,6 +14,7 @@ class MeteoHost extends StatefulWidget {
 class _MeteoHostState extends State<MeteoHost> {
   int _selectedIndex = 0;
   String _pageName= "Météo";
+  String _userName = userInfo!.displayName!;
   List<Widget> pages = <Widget>[
     const MeteoPage(),
     const MeteosList(),
@@ -24,8 +26,10 @@ class _MeteoHostState extends State<MeteoHost> {
       if(_selectedIndex == 0)
         {
           _pageName= "Météo";
+          _userName = userInfo!.displayName!;
         }else{
         _pageName= "Prévisions";
+        _userName = "";
       }
     });
   }
@@ -33,8 +37,22 @@ class _MeteoHostState extends State<MeteoHost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pageName, style: TextStyle(fontSize: 20),),
-        leading: IconButton(onPressed: () {  Navigator.pushNamed(context, '/'); }, icon: Icon(Icons.exit_to_app_outlined),) ,
+        title:
+           Row(
+            children: [
+              Text(_pageName, style: TextStyle(fontSize: 20),),
+              SizedBox(width: 10,),
+              Text(_userName, style: TextStyle(fontSize: 15), overflow: TextOverflow.ellipsis),
+            ],
+          ),
+
+
+        leading: IconButton(onPressed: () {
+
+          googleSignIn.signOut();
+          Navigator.pushNamed(context, '/');
+
+          }, icon: Icon(Icons.exit_to_app_outlined),) ,
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar:  BottomNavigationBar(
@@ -42,11 +60,12 @@ class _MeteoHostState extends State<MeteoHost> {
         onTap: _onItemTapped,
         selectedItemColor: Colors.lightBlueAccent,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'Poké'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Météo'),
+          BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'Prévisions'),
 
         ],
       ),
+
 
     );
   }

@@ -1,8 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meteo/Views/MeteoHost.dart';
 import 'package:meteo/Views/loginpage.dart';
 
-void main() {
+import 'firebase_options.dart';
+late GoogleSignIn googleSignIn ;
+GoogleSignInAccount? userInfo;
+Future<void> main() async {
+  final List<String> scopes = <String>[
+    'email',
+    //'https://www.googleapis.com/auth/contacts.readonly',
+  ];
+
+  googleSignIn = GoogleSignIn(
+    // Optional clientId
+    // clientId: 'your-client_id.apps.googleusercontent.com',
+    scopes: scopes,
+  );
+
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

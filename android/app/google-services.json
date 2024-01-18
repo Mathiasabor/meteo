@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "82617446882",
+    "project_id": "meteo-33526",
+    "storage_bucket": "meteo-33526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82617446882:android:92862ce17d19640dc109bb",
+        "android_client_info": {
+          "package_name": "com.example.meteo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82617446882-67mup5dulr5d1a2albb2ekhqsn4i2b6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meteo",
+            "certificate_hash": "78880b717de792854991bb41585f61f9c5f62ac3"
+          }
+        },
+        {
+          "client_id": "82617446882-dqluuocjm32ac56mj84vtkeptv4s54l2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrdE_PHYFhf-gPATMky2GuPX8CWcx44A8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82617446882-dqluuocjm32ac56mj84vtkeptv4s54l2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "82617446882-elc6e8pef3ehrkf4mjdgnsignto5k5jg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.meteo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
