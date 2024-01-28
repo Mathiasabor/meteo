@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
+import 'package:meteo/Services/Authentification.dart';
 
-final _formKey = GlobalKey<FormState>();
+import 'Components/Ressources/Images.dart';
+import 'Components/Ressources/Text.dart';
+
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -10,11 +13,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
-
-
-
-
 
   @override
   void initState() {
@@ -26,70 +24,85 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
 
+
+
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(height: 50),
-              Icon(
-                Icons.lock_outline,
-                size: 100,
-              ),
-              SizedBox(height: 50),
-              Text(
-                'Nous sommes ravis de vous revoir',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 16,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(LOGIN_PAGE_IMAGES),
+              fit: BoxFit.fill
+            )
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(height: 50),
+
+                Image(image: AssetImage(LOGIN_PAGE_ICON), width: 200, height: 200,),
+                SizedBox(height: 20),
+
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+
+                      Text(LOGIN_LABEL, style: TextStyle(fontSize: 30,),
+
+                      ),
+
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  children: [
 
-                    Center(
-                        child: ElevatedButton(
+                //SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Column(
+                    children: [
 
-                          onPressed: () async{
-
-                           userInfo = await googleSignIn.signIn();
-
-                           print({ "Nom" : userInfo?.displayName,
-                             "Email" : userInfo?.email
+                      Center(
+                          child: ElevatedButton(
 
 
-                           });
-
-                            Navigator.pushNamed(context, '/meteo');
-                          },
-                          style: ButtonStyle(),
-
-                          child: Row(
-                            children: [
-                              Image(image : AssetImage('assets/images/chercher.png'), width: 20, height: 20,),
-                              SizedBox(width: 8.0,),
-                              Text('Continuer avec Google', style: TextStyle(fontSize: 20),)
-
-                            ],
-                          )
-                          ,)
+                            onPressed: () async{
+                             userInfo = await AuthentificationServices().connecter();
 
 
+                              Navigator.pushNamed(context, '/meteo');
+                            },
+                            style: ButtonStyle(),
 
-                    ),
+                            child: SizedBox(
+                              height: 50.0,
+                              child: Row(
+
+                                children: [
+                                  Image(image : AssetImage(GOOGLE_ICON), width: 20, height: 20,),
+                                  SizedBox(width: 8.0,),
+                                  Text(GOOGLE_LOGIN_BUTTON_TEXT, style: TextStyle(fontSize: 20),)
+
+                                ],
+                              ),
+                            )
+                            ,)
 
 
-                  ],
+
+                      ),
+
+
+                    ],
+                  )
                 )
-              )
 
 
 
-          ],),
+            ],),
+          ),
         ),
       ),
     );

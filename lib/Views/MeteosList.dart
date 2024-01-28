@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:provider/provider.dart';
 import '../Models/data.dart';
+import '../ViewModel/MeteoViewModel.dart';
+import 'Components/Components.dart';
+import 'Components/Ressources/Text.dart';
+
+
 
 class MeteosList extends StatefulWidget {
   const MeteosList({super.key});
@@ -11,32 +16,46 @@ class MeteosList extends StatefulWidget {
 }
 
 class _MeteosListState extends State<MeteosList> {
+
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: ListView.builder(
-          itemCount: Meteo.db.length,
-        itemBuilder: (context, int index){
-            return CardMeteo(Meteo.db[index]);
-        },
+    DateTime date = DateTime.now();
 
+    var meteoviewmodel = Provider.of<MeteoViewModel>(context);
+    return  Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
+      body: FutureBuilder<Meteos>(
+          future: meteoviewmodel.fdata(),
+          builder: (context, snapshot) {
+
+            if(snapshot.connectionState == ConnectionState.waiting)
+            {
+              return Center(
+                child: CircularProgressIndicator(
+
+                ),
+              );
+            }else if(snapshot.hasError)
+            {
+              return Text(NOT_AUTHORIZED);
+            }
+
+            return ListView.builder(
+              itemCount: meteoviewmodel.meteos?.daily.length,
+              itemBuilder: (context, int index){
+                return MeteoByDay(meteoviewmodel.meteos!.daily[index], date.add(Duration(days: index)));
+              },
+
+            );
+
+          }
       )
     );
+
   }
 
-  Widget CardMeteo(Meteo meteo){
-    return Card(
-        child: Center(
-          child: Column(
-            children: [
-              Image(image: AssetImage(meteo.image)),
-              SizedBox(height: 20,),
-              Text(meteo.daydate, style: TextStyle(fontSize: 20),),
-              SizedBox(height: 20,),
-              Text(meteo.temperature +"  "+meteo.nature, style: TextStyle(fontSize: 20),)
-            ],
-          ),
-        )
-    );
-  }
+
 }
+
+

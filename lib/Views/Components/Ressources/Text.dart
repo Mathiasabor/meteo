@@ -1,0 +1,11 @@
+String APP_NAME ="";
+String LOGIN_LABEL ="Weather4Us";
+String GOOGLE_LOGIN_BUTTON_TEXT ="Continuer avec Google";
+String METEO ="Météo";
+String PREVISIONS="Prévisions";
+String DANS_LA_JOURNEE="Dans la journée";
+String NOT_AUTHORIZED ="NOT AUTHORIZED";
+String HDT ="Hdt";
+String HUMIDITY ="Humidity";
+String APIKEY = "761ca3f277f4c3a96e79d4024ddef5a2";
+String EMAIL ="email";

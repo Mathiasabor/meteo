@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meteo/Views/MeteosList.dart';
+import 'package:meteo/Services/Authentification.dart';
+import 'package:meteo/Views/Components/Ressources/Text.dart';
+import '../Routes/Routes.dart';
 
-import '../main.dart';
-import 'MeteoPage.dart';
 
 class MeteoHost extends StatefulWidget {
   const MeteoHost({super.key});
@@ -12,23 +12,21 @@ class MeteoHost extends StatefulWidget {
 }
 
 class _MeteoHostState extends State<MeteoHost> {
+
   int _selectedIndex = 0;
-  String _pageName= "Météo";
+  String _pageName= METEO;
   String _userName = userInfo!.displayName!;
-  List<Widget> pages = <Widget>[
-    const MeteoPage(),
-    const MeteosList(),
-  ];
+  List<Widget> pages = Routes.Hostpages;
 
   void _onItemTapped(int index){
     setState((){
       _selectedIndex = index;
       if(_selectedIndex == 0)
         {
-          _pageName= "Météo";
+          _pageName= METEO;
           _userName = userInfo!.displayName!;
         }else{
-        _pageName= "Prévisions";
+        _pageName= PREVISIONS;
         _userName = "";
       }
     });
@@ -48,8 +46,8 @@ class _MeteoHostState extends State<MeteoHost> {
 
 
         leading: IconButton(onPressed: () {
+          AuthentificationServices().deconnecter();
 
-          googleSignIn.signOut();
           Navigator.pushNamed(context, '/');
 
           }, icon: Icon(Icons.exit_to_app_outlined),) ,
@@ -60,8 +58,8 @@ class _MeteoHostState extends State<MeteoHost> {
         onTap: _onItemTapped,
         selectedItemColor: Colors.lightBlueAccent,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Météo'),
-          BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'Prévisions'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: METEO),
+          BottomNavigationBarItem(icon: Icon(Icons.cloud), label: PREVISIONS),
 
         ],
       ),
